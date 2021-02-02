@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div class="dflex aicenter ffcolumn ctrlPanel" >
+    <header>
+        select option
+    </header>
+    <div class="row ffrow dflex jcspaceB">
+            <button class="prev">
+                back
+            </button>
+            <div class="screen active">
+                text
+            </div>
+            <button class="next">
+                next
+            </button>
+    </div>
+
+</div>
+<script>
+class inputChooser{
+    index= 0;
+    constructor(){
+        this.screen             = document.querySelector('.screen');
+        this.data               = ['option 1', 'option 2', 'option 3', 'option 4', 'option 5', 'option 6'];
+        this.screen.textContent = this.data[this.index];
+
+        
+    }
+    next=()=>{
+        this.index < (this.data.length-1) ? this.index+=1:this.index=this.index;
+        this.screen.classList.add('fall');
+        this.screen.classList.remove('active');
+        this.screen.addEventListener('transitionend',()=>{
+
+            this.screen.classList.remove('fall');
+            this.screen.textContent = '';
+            this.screen.addEventListener('transitionend',()=>{
+                    this.screen.textContent = this.data[this.index];
+                    this.screen.classList.add('active');
+                 });
+            
+        })
+    
+    }
+    prev=()=>{
+        this.index > 0 ? this.index-=1:this.index=this.index;
+        this.screen.classList.add('fall');
+        this.screen.classList.remove('active');
+        this.screen.addEventListener('transitionend',()=>{
+
+            this.screen.classList.remove('fall');
+            this.screen.textContent = '';
+            this.screen.addEventListener('transitionend',()=>{
+                    this.screen.textContent = this.data[this.index];
+                    this.screen.classList.add('active');
+                 });
+            
+        })
+    }
+    
+}
+const chooser = new inputChooser;
+const nextButton = document.querySelector('.next');
+const prevButton = document.querySelector('.prev');
+
+nextButton.addEventListener('click', chooser.next);
+prevButton.addEventListener('click', chooser.prev);
+
+
+
+</script>
+</body>
+</html>
