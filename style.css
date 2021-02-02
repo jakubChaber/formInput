@@ -84,3 +84,8 @@ button{
 .next{
     background-color:#203647;
 }
+@media all and (max-width:1000px){
+    .ctrlPanel{
+        width:100%;
+    }
+}
