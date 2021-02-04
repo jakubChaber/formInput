@@ -33,7 +33,7 @@ class inputChooser{
         this.data               = ['option 1', 'option 2', 'option 3', 'option 4', 'option 5', 'option 6'];
         this.screen.textContent = this.data[this.index];   
     }
-    #changeIndexWithTransition=()=>{
+    changeIndexWithTransition=()=>{
         this.screen.classList.add('fall');
         this.screen.classList.remove('active');
         this.screen.addEventListener('transitionend',()=>{
@@ -49,11 +49,11 @@ class inputChooser{
     }
     next=()=>{
         this.index < (this.data.length-1) ? this.index+=1:this.index=this.index;
-        this.#changeIndexWithTransition();
+        this.changeIndexWithTransition();
     }
     prev=()=>{
         this.index > 0 ? this.index-=1:this.index=this.index;
-        this.#changeIndexWithTransition();
+        this.changeIndexWithTransition();
     }
     
 }
