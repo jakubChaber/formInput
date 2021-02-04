@@ -31,40 +31,29 @@ class inputChooser{
     constructor(){
         this.screen             = document.querySelector('.screen');
         this.data               = ['option 1', 'option 2', 'option 3', 'option 4', 'option 5', 'option 6'];
-        this.screen.textContent = this.data[this.index];
+        this.screen.textContent = this.data[this.index];   
+    }
+    #changeIndexWithTransition=()=>{
+        this.screen.classList.add('fall');
+        this.screen.classList.remove('active');
+        this.screen.addEventListener('transitionend',()=>{
 
-        
+            this.screen.classList.remove('fall');
+            this.screen.textContent = '';
+            this.screen.addEventListener('transitionend',()=>{
+                    this.screen.textContent = this.data[this.index];
+                    this.screen.classList.add('active');
+                 });
+            
+        })
     }
     next=()=>{
         this.index < (this.data.length-1) ? this.index+=1:this.index=this.index;
-        this.screen.classList.add('fall');
-        this.screen.classList.remove('active');
-        this.screen.addEventListener('transitionend',()=>{
-
-            this.screen.classList.remove('fall');
-            this.screen.textContent = '';
-            this.screen.addEventListener('transitionend',()=>{
-                    this.screen.textContent = this.data[this.index];
-                    this.screen.classList.add('active');
-                 });
-            
-        })
-    
+        this.#changeIndexWithTransition();
     }
     prev=()=>{
         this.index > 0 ? this.index-=1:this.index=this.index;
-        this.screen.classList.add('fall');
-        this.screen.classList.remove('active');
-        this.screen.addEventListener('transitionend',()=>{
-
-            this.screen.classList.remove('fall');
-            this.screen.textContent = '';
-            this.screen.addEventListener('transitionend',()=>{
-                    this.screen.textContent = this.data[this.index];
-                    this.screen.classList.add('active');
-                 });
-            
-        })
+        this.#changeIndexWithTransition();
     }
     
 }
